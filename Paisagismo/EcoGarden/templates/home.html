@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bem-vindo à EcoGarden</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f4f0;
+      color: #333;
+    }
+    nav {
+      background-color: #388E3C;
+      padding: 25px 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+    }
+    nav ul li {
+      display: inline;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.3em;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    nav ul li a:hover {
+      background-color: #2E7D32;
+    }
+    header {
+      text-align: center;
+      padding: 30px 20px;
+      background-color: #4CAF50;
+      color: white;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    .content {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    tr:hover {
+      background-color: #ddd;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      bottom: 0;
+      width: 100%;
+    }
+    @media (max-width: 600px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav ul li a {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'inspiracoes' %}">Inspirações</a></li>
+            <li><a href="{% url 'contato' %}">Contato</a></li>
+            <li><a href="{% url 'economia_agua'%}">Economia do Jardim</a></li>
+            <li><a href="{% url 'calcular_valor'%}">Calculadora</a></li>
+            <li><a href="{% url 'add_servico'%}">Adicionar Serviço</a></li>
+        </ul>
+  </nav>
+  <header>
+    <h1>Bem-vindo à EcoGarden</h1>
+    <p>Transforme seu espaço com nossas ideias e produtos para jardinagem!</p>
+  </header>
+  <div class="content">
+    <h2>Sua paixão por jardins começa aqui</h2>
+    <p>Explore nossas inspirações e descubra como criar o jardim dos seus sonhos. Oferecemos tudo o que você precisa para tornar seu espaço verde ainda mais especial.</p> <br>
+    <h2>Serviços</h2>
+    {% if Servicos %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for servico in Servicos %}
+            <tr>
+                <td>{{ servico.nome }}</td>
+                <td>{{ servico.descricao }}</td>
+                <td>R${{ servico.preco }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Nenhum serviço cadastrado no site, para mais informações entre em contato</p>
+    {% endif %}
+  </div>
+  <footer>
+    <p>&copy; 2025 EcoGarden. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>

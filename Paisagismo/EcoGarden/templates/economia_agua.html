@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Economia de Água</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f4f0;
+        color: #333;
+        }
+        nav {
+        background-color: #388E3C;
+        padding: 25px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        }
+        nav ul li {
+        display: inline;
+        }
+        nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.3em;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        }
+        nav ul li a:hover {
+        background-color: #2E7D32;
+        }
+        header {
+        text-align: center;
+        padding: 30px 20px;
+        background-color: #4CAF50;
+        color: white;
+        }
+        header h1 {
+        margin: 0;
+        font-size: 2.5em;
+        }
+        .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        }
+        .gallery img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        }
+        .gallery img:hover {
+        transform: scale(1.05);
+        }
+        footer {
+        text-align: center;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        bottom: 0;
+        width: 100%;
+        }
+        .content {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        }
+        .contact-form {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
+        .contact-form label {
+          font-weight: bold;
+        }
+        .contact-form input, .contact-form textarea {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 1em;
+        }
+        .contact-form button {
+          background-color: #4CAF50;
+          color: white;
+          padding: 10px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 1.1em;
+        }
+        .contact-form button:hover {
+          background-color: #2E7D32;
+        }
+        @media (max-width: 600px) {
+        .gallery {
+            grid-template-columns: 1fr;
+        }
+        nav ul {
+            flex-direction: column;
+            align-items: center;
+        }
+        nav ul li a {
+            padding: 10px;
+        }
+     }
+  </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'inspiracoes' %}">Inspirações</a></li>
+            <li><a href="{% url 'contato' %}">Contato</a></li>
+            <li><a href="{% url 'economia_agua'%}">Economia do Jardim</a></li>
+            <li><a href="{% url 'calcular_valor'%}">Calculadora</a></li>
+            <li><a href="{% url 'add_servico'%}">Adicionar Serviço</a></li>
+        </ul>
+  </nav>
+  <header>
+    <h1>Calculadora Verde - Economia de Água</h1>
+    <p>Calcule a economia de água em um jardim usando plantas nativas e irrigação eficiente.</p>
+  </header>
+  <div class="content">
+    <form class="contact-form" method="POST">
+      {% csrf_token %}
+      <label>Área do jardim (m²):</label>
+      <input type="number" step="0.1" name="area" required>
+
+      <label>Plantas nativas (%):</label>
+      <input type="number" step="1" name="nativas" min="0" max="100" required>
+
+      <button type="submit">Calcular</button>
+    </form>
+
+    {% if resultado %}
+      <h3>Resultado:</h3>
+      <p>{{ resultado }}</p>
+    {% endif %}
+  </div>
+  <footer>
+    <p>&copy; 2025 EcoGarden. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
